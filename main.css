@@ -52,29 +52,6 @@
 .children__9293f:after {
   background: 0 0;
 }
-
-.stack_dbd263 .listItem__650eb:not(.wrapper__48112 .listItem__650eb) {
-  width: initial;
-  padding: 1px;
-  margin: 2px;
-}
-.stack_dbd263 {
-  justify-content: flex-start !important;
-}
-.stack_dbd263 .wrapper__48112 .listItem__650eb {
-  width: initial;
-}
-.scroller_ef3116 > .listItem__650eb {
-  width: 100%;
-}
-.listItem-GuPuDH {
-  width: auto;
-  margin-left: 0;
-}
-.wrapper-21YSNc {
-  position: relative;
-  width: auto;
-}
 @keyframes rainbow {
   0% {
     -webkit-filter: hue-rotate(0);
