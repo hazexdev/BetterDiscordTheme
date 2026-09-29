@@ -159,7 +159,7 @@
 }
 
 .wrapper__58105.overlay__58105 .item__58105:not([style*="height: 8px"]) {
-  border-color: transparent;
+  border-color: var(--main-theme-color);
   background-color: initial;
 }
 
