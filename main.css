@@ -115,17 +115,6 @@
   width: auto;
 }
 
-/* Outline tuning (rainbow ring around server icons / folders).
-   The ring is a fixed square now, so it can no longer stretch with an
-   expanded folder. If it looks 1-2px off, nudge these. */
-:root {
-  --ring-size: 48px;       /* ring width + height (icon is 48px) */
-  --ring-radius: 30%;      /* corner roundness */
-  --ring-x: 2px;           /* horizontal position for normal icons */
-  --ring-y: -2px;          /* vertical position */
-  --ring-x-folder: 3px;    /* horizontal position for icons inside an open folder */
-}
-
 @keyframes rainbow {
   0% {
     -webkit-filter: hue-rotate(0);
@@ -159,15 +148,14 @@
   border: 2px solid var(--main-theme-color);
   background: transparent;
   display: block;
-  box-sizing: border-box;
-  border-radius: var(--ring-radius) !important;
+  border-radius: 30% !important;
   position: absolute;
   transform: none !important;
   inset: 0 !important;
-  top: var(--ring-y) !important;
-  left: var(--ring-x) !important;
-  width: var(--ring-size) !important;
-  height: var(--ring-size) !important;
+  top: -2px !important;
+  left: 2px !important;
+  width: 100%;
+  height: 100% !important;
 }
 
 .wrapper__58105.overlay__58105 .item__58105:not([style*="height: 8px"]) {
@@ -255,10 +243,10 @@
   .listItem__650eb
   .pill_e5445c.wrapper__58105
   .item__58105 {
-  width: var(--ring-size) !important;
-  height: var(--ring-size) !important;
-  left: var(--ring-x-folder) !important;
-  top: var(--ring-y) !important;
+  width: 85% !important;
+  height: 100% !important;
+  left: 5px !important;
+  top: -2px !important;
 }
 
 .wrapper__48112.isExpanded__48112 .stack_dbd263 {
@@ -303,8 +291,7 @@
   .pill_e5445c.wrapper__58105
   .item__58105 {
   margin-left: -3px !important;
-  width: var(--ring-size) !important;
-  height: var(--ring-size) !important;
+  width: 48px !important;
 }
 
 .stack_dbd263.folderGuildsList__48112 {
@@ -519,4 +506,4 @@
 
 .chatTypingGradientAtBottom__36d07 {
   background: transparent;
-}
+} 
