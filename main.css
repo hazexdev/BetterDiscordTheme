@@ -115,6 +115,17 @@
   width: auto;
 }
 
+/* Outline tuning (rainbow ring around server icons / folders).
+   The ring is a fixed square now, so it can no longer stretch with an
+   expanded folder. If it looks 1-2px off, nudge these. */
+:root {
+  --ring-size: 48px;       /* ring width + height (icon is 48px) */
+  --ring-radius: 30%;      /* corner roundness */
+  --ring-x: 2px;           /* horizontal position for normal icons */
+  --ring-y: -2px;          /* vertical position */
+  --ring-x-folder: 3px;    /* horizontal position for icons inside an open folder */
+}
+
 @keyframes rainbow {
   0% {
     -webkit-filter: hue-rotate(0);
@@ -131,76 +142,42 @@
   }
 }
 
-/* =====================================================================
-   SERVER ICON RING  (hover / selected / unread)
-
-   OLD approach: Discord's left "pill" element was stretched into a box
-   (position:absolute; inset:0; width/height 100%). Its size came from
-   the pill's parent, so it grew with expanded folders and never matched
-   the icon width in multi-column layouts, hence the hacks (left:2px,
-   top:-2px, width:85%, margin-left:-3px ...).
-
-   NEW approach: the pill is hidden and only used as a state sensor.
-   The ring is a ::after drawn INSIDE the icon element itself
-   (.childWrapper), so it always has the exact size and shape of the
-   icon, round or rounded-square, in any column layout, folder open
-   or closed.
-   ===================================================================== */
-
 .wrapper__58105 {
   overflow: visible !important;
 }
 
-/* pill is only a state sensor now, never shown */
-.wrapper__58105 .item__58105 {
-  display: none !important;
+.wrapper__58105.overlay__58105 {
+  width: 100% !important;
+}
+
+.overlay__58105 {
+  top: initial !important;
+}
+
+.item__58105 {
+  animation: var(--unread-server-animation) 3s linear infinite;
+  border: 2px solid var(--main-theme-color);
+  background: transparent;
+  display: block;
+  box-sizing: border-box;
+  border-radius: var(--ring-radius) !important;
+  position: absolute;
+  transform: none !important;
+  inset: 0 !important;
+  top: var(--ring-y) !important;
+  left: var(--ring-x) !important;
+  width: var(--ring-size) !important;
+  height: var(--ring-size) !important;
+}
+
+.wrapper__58105.overlay__58105 .item__58105:not([style*="height: 8px"]) {
+  border-color: var(--main-theme-color);
+  background-color: initial;
 }
 
 #guild-list-unread-dms .item__58105 {
   display: none !important;
 }
-
-/* the icon */
-.wrapper_ef3116 .childWrapper__6e9f8 {
-  position: relative;
-}
-
-/* the ring (hidden until needed) */
-.wrapper_ef3116 .childWrapper__6e9f8::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  box-sizing: border-box;
-  border: 2px solid var(--main-theme-color);
-  border-radius: inherit;
-  box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.45); /* dark inner band = clean contrast */
-  opacity: 0;
-  pointer-events: none;
-  z-index: 2;
-  transition: opacity 0.15s ease;
-}
-
-/* UNREAD: calm, static ring (Discord sets the pill to 8px for unread) */
-.wrapper_ef3116 .wrapper__58105:has(.item__58105[style*="height: 8px"]) ~ .childWrapper__6e9f8::after,
-.wrapper_ef3116 .wrapper__58105:has(.item__58105[style*="height: 8px"]) ~ * .childWrapper__6e9f8::after {
-  opacity: 0.55;
-}
-
-/* HOVER + SELECTED (selected = pill at 40px): animated ring */
-.wrapper_ef3116 .childWrapper__6e9f8:hover::after,
-.wrapper_ef3116 .wrapper__58105:has(.item__58105[style*="height: 40px"]) ~ .childWrapper__6e9f8::after,
-.wrapper_ef3116 .wrapper__58105:has(.item__58105[style*="height: 40px"]) ~ * .childWrapper__6e9f8::after {
-  opacity: 1;
-  animation: var(--unread-server-animation) 3s linear infinite;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .wrapper_ef3116 .childWrapper__6e9f8::after {
-    animation: none !important;
-  }
-}
-
-/* ===================================================================== */
 
 .stack_dbd263.scroller_ef3116.none_d125d2.scrollerBase_d125d2 {
   justify-content: center;
@@ -273,6 +250,17 @@
   width: 100%;
 }
 
+.wrapper__48112.isExpanded__48112
+  .stack_dbd263
+  .listItem__650eb
+  .pill_e5445c.wrapper__58105
+  .item__58105 {
+  width: var(--ring-size) !important;
+  height: var(--ring-size) !important;
+  left: var(--ring-x-folder) !important;
+  top: var(--ring-y) !important;
+}
+
 .wrapper__48112.isExpanded__48112 .stack_dbd263 {
   overflow: visible;
 }
@@ -308,6 +296,15 @@
 
 .folderGroup__48112 {
   width: 54px !important;
+}
+
+.folderGroup__48112:not(.isExpanded__48112)
+  .listItem__650eb
+  .pill_e5445c.wrapper__58105
+  .item__58105 {
+  margin-left: -3px !important;
+  width: var(--ring-size) !important;
+  height: var(--ring-size) !important;
 }
 
 .stack_dbd263.folderGuildsList__48112 {
