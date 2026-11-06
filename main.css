@@ -115,16 +115,15 @@
   width: auto;
 }
 
-/* Outline tuning: ring drawn AROUND the 48px icon (2px gap + 2px line).
-   56px ring = 48 icon + 2*4, so it sits outside the icon.
-   Position is measured from the pill wrapper's top-left corner.
-   If it looks 1-2px off, nudge these. */
+/* Outline tuning (rainbow ring around server icons / folders).
+   The ring is a fixed square now, so it can no longer stretch with an
+   expanded folder. If it looks 1-2px off, nudge these. */
 :root {
-  --ring-size: 56px;
-  --ring-radius: 20px;     /* icon hover radius (16px) + 4px = concentric corners */
-  --ring-x: -2px;          /* left/right for normal icons (negative = left) */
-  --ring-y: -6px;          /* up/down (negative = up) */
-  --ring-x-folder: -1px;   /* left/right for icons inside an open folder */
+  --ring-size: 48px;       /* ring width + height (icon is 48px) */
+  --ring-radius: 30%;      /* corner roundness */
+  --ring-x: 2px;           /* horizontal position for normal icons */
+  --ring-y: -2px;          /* vertical position */
+  --ring-x-folder: 3px;    /* horizontal position for icons inside an open folder */
 }
 
 @keyframes rainbow {
@@ -251,10 +250,6 @@
   width: 100%;
 }
 
-.wrapper__48112.isExpanded__48112 .stack_dbd263 {
-  overflow: visible;
-}
-
 .wrapper__48112.isExpanded__48112
   .stack_dbd263
   .listItem__650eb
@@ -264,6 +259,10 @@
   height: var(--ring-size) !important;
   left: var(--ring-x-folder) !important;
   top: var(--ring-y) !important;
+}
+
+.wrapper__48112.isExpanded__48112 .stack_dbd263 {
+  overflow: visible;
 }
 
 .expandedFolderBackground__48112 {
@@ -322,21 +321,6 @@
 
 .wrapper_ef3116 .scroller_ef3116 {
   justify-content: center;
-}
-
-/* No more stretching: an icon next to an open folder keeps its own height
-   (so its pill/outline can't grow), and an open folder's background only
-   covers its own icons. */
-.wrapper_ef3116 .scroller_ef3116,
-.tree_ef3116 .stack_dbd263,
-.itemsContainer_ef3116 .stack_dbd263 {
-  align-items: flex-start !important;
-}
-
-.stack_dbd263 .listItem__650eb:not(.wrapper__48112 .listItem__650eb),
-.wrapper__48112,
-.folderGroup__48112 {
-  align-self: flex-start !important;
 }
 
 .tabBody__133bf {
