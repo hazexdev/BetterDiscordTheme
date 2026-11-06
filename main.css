@@ -159,7 +159,7 @@
 }
 
 .wrapper__58105.overlay__58105 .item__58105:not([style*="height: 8px"]) {
-  border-color: var(--main-theme-color);
+  border-color: transparent;
   background-color: initial;
 }
 
@@ -498,7 +498,7 @@
 
 .scroller__53543 {
   background-color: transparent;
-} 
+}
 
 .chatTypingGradientNotAtBottom__36d07 {
   background: transparent;
