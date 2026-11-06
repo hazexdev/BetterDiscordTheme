@@ -115,15 +115,18 @@
   width: auto;
 }
 
-/* Outline tuning (rainbow ring around server icons / folders).
-   The ring is a fixed square now, so it can no longer stretch with an
-   expanded folder. If it looks 1-2px off, nudge these. */
+/* Outline tuning (rainbow ring AROUND server icons / folders).
+   The ring is a fixed square LARGER than the 48px icon, so it sits outside
+   the icon with a small gap and can never stretch with an open folder.
+     ring-size = 48 icon + 2*gap + 2*border  (56px = 2px gap, 2px border)
+     ring-radius = icon radius (16px on hover) + 4px, so corners stay concentric
+   If it looks off-centre by a pixel or two, nudge ring-x / ring-y. */
 :root {
-  --ring-size: 48px;       /* ring width + height (icon is 48px) */
-  --ring-radius: 30%;      /* corner roundness */
-  --ring-x: 2px;           /* horizontal position for normal icons */
-  --ring-y: -2px;          /* vertical position */
-  --ring-x-folder: 3px;    /* horizontal position for icons inside an open folder */
+  --ring-size: 56px;
+  --ring-radius: 20px;
+  --ring-x: -2px;          /* horizontal position, normal icons */
+  --ring-y: -6px;          /* vertical position */
+  --ring-x-folder: -1px;   /* horizontal position inside an open folder */
 }
 
 @keyframes rainbow {
