@@ -115,20 +115,6 @@
   width: auto;
 }
 
-/* Outline tuning (rainbow ring AROUND server icons / folders).
-   The ring is a fixed square LARGER than the 48px icon, so it sits outside
-   the icon with a small gap and can never stretch with an open folder.
-     ring-size = 48 icon + 2*gap + 2*border  (56px = 2px gap, 2px border)
-     ring-radius = icon radius (16px on hover) + 4px, so corners stay concentric
-   If it looks off-centre by a pixel or two, nudge ring-x / ring-y. */
-:root {
-  --ring-size: 56px;
-  --ring-radius: 20px;
-  --ring-x: -2px;          /* horizontal position, normal icons */
-  --ring-y: -6px;          /* vertical position */
-  --ring-x-folder: -1px;   /* horizontal position inside an open folder */
-}
-
 @keyframes rainbow {
   0% {
     -webkit-filter: hue-rotate(0);
@@ -162,15 +148,14 @@
   border: 2px solid var(--main-theme-color);
   background: transparent;
   display: block;
-  box-sizing: border-box;
-  border-radius: var(--ring-radius) !important;
+  border-radius: 30% !important;
   position: absolute;
   transform: none !important;
   inset: 0 !important;
-  top: var(--ring-y) !important;
-  left: var(--ring-x) !important;
-  width: var(--ring-size) !important;
-  height: var(--ring-size) !important;
+  top: -2px !important;
+  left: 2px !important;
+  width: 100%;
+  height: 100% !important;
 }
 
 .wrapper__58105.overlay__58105 .item__58105:not([style*="height: 8px"]) {
@@ -258,10 +243,10 @@
   .listItem__650eb
   .pill_e5445c.wrapper__58105
   .item__58105 {
-  width: var(--ring-size) !important;
-  height: var(--ring-size) !important;
-  left: var(--ring-x-folder) !important;
-  top: var(--ring-y) !important;
+  width: 85% !important;
+  height: 100% !important;
+  left: 5px !important;
+  top: -2px !important;
 }
 
 .wrapper__48112.isExpanded__48112 .stack_dbd263 {
@@ -306,8 +291,7 @@
   .pill_e5445c.wrapper__58105
   .item__58105 {
   margin-left: -3px !important;
-  width: var(--ring-size) !important;
-  height: var(--ring-size) !important;
+  width: 48px !important;
 }
 
 .stack_dbd263.folderGuildsList__48112 {
