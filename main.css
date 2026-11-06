@@ -115,6 +115,18 @@
   width: auto;
 }
 
+/* Outline tuning: the ring is drawn AROUND the 48px icon (2px gap + 2px line).
+   ring-size 56 = 48 icon + 2*4. It is centred horizontally on the icon, so it
+   fits any column width. Nudge if it looks 1px off:
+     --ring-y       up/down   (negative = up)
+     --ring-nudge-x left/right (negative = left) */
+:root {
+  --ring-size: 56px;
+  --ring-radius: 20px;     /* icon hover radius (16px) + 4px = concentric corners */
+  --ring-y: -1px;
+  --ring-nudge-x: 0px;
+}
+
 @keyframes rainbow {
   0% {
     -webkit-filter: hue-rotate(0);
@@ -148,14 +160,16 @@
   border: 2px solid var(--main-theme-color);
   background: transparent;
   display: block;
-  border-radius: 30% !important;
+  box-sizing: border-box;
+  border-radius: var(--ring-radius) !important;
   position: absolute;
   transform: none !important;
-  inset: 0 !important;
-  top: -2px !important;
-  left: 2px !important;
-  width: 100%;
-  height: 100% !important;
+  inset: auto !important;
+  top: var(--ring-y) !important;
+  left: 50% !important;
+  margin-left: calc(var(--ring-size) / -2 + var(--ring-nudge-x)) !important;
+  width: var(--ring-size) !important;
+  height: var(--ring-size) !important;
 }
 
 .wrapper__58105.overlay__58105 .item__58105:not([style*="height: 8px"]) {
@@ -238,17 +252,6 @@
   width: 100%;
 }
 
-.wrapper__48112.isExpanded__48112
-  .stack_dbd263
-  .listItem__650eb
-  .pill_e5445c.wrapper__58105
-  .item__58105 {
-  width: 85% !important;
-  height: 100% !important;
-  left: 5px !important;
-  top: -2px !important;
-}
-
 .wrapper__48112.isExpanded__48112 .stack_dbd263 {
   overflow: visible;
 }
@@ -286,14 +289,6 @@
   width: 54px !important;
 }
 
-.folderGroup__48112:not(.isExpanded__48112)
-  .listItem__650eb
-  .pill_e5445c.wrapper__58105
-  .item__58105 {
-  margin-left: -3px !important;
-  width: 48px !important;
-}
-
 .stack_dbd263.folderGuildsList__48112 {
   gap: 0px !important;
 }
@@ -308,6 +303,21 @@
 
 .wrapper_ef3116 .scroller_ef3116 {
   justify-content: center;
+}
+
+/* No more stretching: an icon next to an open folder keeps its own height
+   (so its pill/outline can't grow), and an open folder's background only
+   covers its own icons. */
+.wrapper_ef3116 .scroller_ef3116,
+.tree_ef3116 .stack_dbd263,
+.itemsContainer_ef3116 .stack_dbd263 {
+  align-items: flex-start !important;
+}
+
+.stack_dbd263 .listItem__650eb:not(.wrapper__48112 .listItem__650eb),
+.wrapper__48112,
+.folderGroup__48112 {
+  align-self: flex-start !important;
 }
 
 .tabBody__133bf {
@@ -506,4 +516,4 @@
 
 .chatTypingGradientAtBottom__36d07 {
   background: transparent;
-} 
+}
